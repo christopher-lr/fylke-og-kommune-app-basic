@@ -3,7 +3,7 @@ interface ValgtKommuneFormValues {
     countyName: string;
     municipalityNumber: string;
     municipalityName: string;
-    comment: string | undefined;
+    comment?: string | undefined;
 }
 
 export type { ValgtKommuneFormValues };

@@ -15,7 +15,7 @@ function App() {
 
   const { fylker } = useFylker();
   const { kommuner, hentKommuner } = useKommuner();
-  const { handleSubmit } = useSubmitForm();
+  const { handleSubmit, loading } = useSubmitForm();
 
   const handleFylkeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const fylkeNummer = event.target.value;
@@ -88,7 +88,7 @@ function App() {
           onChange={handleCommentChange}
           value={comment}
         />
-        <Button type="submit">Send inn</Button>
+        <Button type="submit" loading={loading}>Send inn</Button>
       </form>
     </>
   )

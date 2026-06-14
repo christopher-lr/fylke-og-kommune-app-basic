@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { FormValues } from "../types/formValues";
 
+const delay = (ms: number): Promise<void> => new Promise((res) => setTimeout(res, ms));
+
 export const useSubmitForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -12,6 +14,7 @@ export const useSubmitForm = () => {
     const url = `/api/municipality/${municipalityNumber}/comments`;
 
     setLoading(true);
+    await delay(3000);
 
     try {
       const res = await fetch(url, {

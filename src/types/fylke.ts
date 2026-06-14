@@ -1,6 +1,6 @@
 interface Fylke {
-    fylkesnummer: string;
-    fylkesnavn: string;
+  fylkesnummer: string;
+  fylkesnavn: string;
 }
 
 export type { Fylke };

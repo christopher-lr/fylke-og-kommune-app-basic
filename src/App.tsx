@@ -1,5 +1,12 @@
 import { useState } from 'react'
-import { Button, Fieldset, Label, Radio, Select, Textfield } from "@digdir/designsystemet-react";
+import {
+  Button,
+  Fieldset,
+  Label,
+  Radio,
+  Select,
+  Textfield
+} from "@digdir/designsystemet-react";
 import { useFylker } from './hooks/useFylker';
 import { useKommuner } from './hooks/useKommuner';
 import { useSubmitForm } from './hooks/useSubmitForm';
@@ -14,14 +21,17 @@ function App() {
   const [comment, setComment] = useState<string>("");
 
   const { fylker } = useFylker();
-  const { kommuner, hentKommuner } = useKommuner();
+  const { kommuner, hentKommuner, nullStillKommuner } = useKommuner();
   const { handleSubmit, loading } = useSubmitForm();
 
   const handleFylkeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const fylkeNummer = event.target.value;
     const fylke = fylker.find((f) => f.fylkesnummer === fylkeNummer)
-    setSelectedFylke(fylke);
-    setSelectedKommune(undefined);
+    if (fylkeNummer !== selectedFylke?.fylkesnummer) {
+      setSelectedFylke(fylke);
+      setSelectedKommune(undefined)
+      nullStillKommuner();
+    }
   }
 
   const handleCommentChange = (event: React.ChangeEvent<HTMLInputElement>) => {

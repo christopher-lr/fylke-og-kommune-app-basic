@@ -1,6 +1,6 @@
 interface Kommune {
-    kommunenummer: string;
-    kommunenavn: string;
+  kommunenummer: string;
+  kommunenavn: string;
 }
 
 export type { Kommune };

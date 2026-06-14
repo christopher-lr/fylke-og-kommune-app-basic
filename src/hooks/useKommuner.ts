@@ -15,5 +15,9 @@ export const useKommuner = () => {
     }
   }
 
-  return { kommuner, hentKommuner };
+  const nullStillKommuner = () => {
+    setKommuner([]);
+  }
+
+  return { kommuner, hentKommuner, nullStillKommuner };
 }

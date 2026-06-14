@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Fylke } from "../types/fylke";
 
-export function useFylker() {
+export const useFylker = () => {
   const [fylker, setFylker] = useState<Fylke[]>([]);
 
   useEffect(() => {

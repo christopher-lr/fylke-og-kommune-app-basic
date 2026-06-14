@@ -7,7 +7,7 @@ import "@digdir/designsystemet-css"
 import "@digdir/designsystemet-css/theme"
 
 async function enableMocking() {
-  if (process.env.NODE_ENV !== 'development') return
+  //if (process.env.NODE_ENV !== 'development') return
   const { worker } = await import('./mocks/browser')
   return worker.start({
     serviceWorker: { url: `${import.meta.env.BASE_URL}mockServiceWorker.js` },

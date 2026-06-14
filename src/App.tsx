@@ -10,7 +10,7 @@ import './styling/App.css';
 
 function App() {
   const [selectedFylke, setSelectedFylke] = useState<Fylke | undefined>(undefined);
-  const [selectedKommune, setSelectedKommune] = useState<Kommune | undefined>(undefined)
+  const [selectedKommune, setSelectedKommune] = useState<Kommune | undefined>(undefined);
   const [comment, setComment] = useState<string>("");
 
   const { fylker } = useFylker();

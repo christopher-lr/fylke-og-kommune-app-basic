@@ -5,5 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   //base: '/fylke-og-kommune-app-basic/',
-  base: process.env.NODE_ENV === 'production' ? 'fylke-og-kommune-app-basic/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/fylke-og-kommune-app-basic/' : '/',
 })

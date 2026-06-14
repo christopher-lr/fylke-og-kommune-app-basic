@@ -21,6 +21,7 @@ function App() {
     const fylkeNummer = event.target.value;
     const fylke = fylker.find((f) => f.fylkesnummer === fylkeNummer)
     setSelectedFylke(fylke);
+    setSelectedKommune(undefined);
   }
 
   const handleCommentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,11 +43,17 @@ function App() {
       comment: comment || undefined,
     };
 
-
     const res = await handleSubmit(selectedKommune.kommunenummer, data);
     if (res) {
       const responseData = await res.json();
-      alert(responseData.text + " See network tab.");
+      alert(responseData.text + " Du sendte verdiene: " + `
+      
+      Fylkesnavn: ${data.countyName}
+      Fylkesnummer: ${data.countyNumber}
+      Kommunenavn: ${data.municipalityName}
+      Kommunenummer: ${data.municipalityNumber}
+      Kommentar: ${data.comment ? data.comment : "Ingen kommentar!"}`
+      );
     }
   };
 
@@ -71,7 +78,9 @@ function App() {
       <form onSubmit={submit} className="centered-form">
         <div>
           <Label>Velg et fylke</Label>
-          <Select value={selectedFylke?.fylkesnummer ?? ""} onChange={handleFylkeChange}>
+          <Select
+            value={selectedFylke?.fylkesnummer ?? ""}
+            onChange={handleFylkeChange}>
             {fylker.map((fylke) => (
               <Select.Option key={fylke.fylkesnummer} value={fylke.fylkesnummer}>
                 {fylke.fylkesnavn}
@@ -79,16 +88,29 @@ function App() {
             ))}
           </Select>
         </div>
-        <Button disabled={selectedFylke === undefined} onClick={() => selectedFylke && hentKommuner(selectedFylke?.fylkesnummer)}>
+
+        <Button
+          disabled={selectedFylke === undefined}
+          onClick={() => selectedFylke && hentKommuner(selectedFylke?.fylkesnummer)}>
           Hent detaljer
         </Button>
+
         {kommuner.length > 0 && renderKommuner()}
+
         <Textfield
-          label={selectedKommune ? `Kommentar til ${selectedKommune?.kommunenavn}` : "Skriv en kommentar etter å ha valgt en kommune"}
+          label={selectedKommune ? `Valgfri kommentar for ${selectedKommune?.kommunenavn}` : ""}
+          placeholder="Skriv en kommentar"
+          disabled={selectedKommune === undefined}
           onChange={handleCommentChange}
           value={comment}
         />
-        <Button type="submit" loading={loading}>Send inn</Button>
+
+        <Button
+          type="submit"
+          loading={loading}
+          disabled={selectedKommune === undefined}>
+          Send inn
+        </Button>
       </form>
     </>
   )
